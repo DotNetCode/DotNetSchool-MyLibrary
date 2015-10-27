@@ -1,0 +1,116 @@
+﻿@section scripts {
+    @Scripts.Render("~/bundles/app")
+}
+
+<div class="page-header">
+    <h1>La mia libreria</h1>
+</div>
+
+<div class="row">
+
+    <div class="col-md-4">
+        <div class="panel panel-default">
+           
+                <div class="panel-heading">
+                    <h2 class="panel-title">Libri</h2>
+                </div>
+                <div class="panel-body">
+                   <!-- <ul class="list-unstyled" data-bind="foreach: books">
+                        <li>
+                            <strong><span data-bind="text: AuthorName"></span></strong>: <span data-bind="text: Title"></span>
+                            <small><a href="#" data-bind="click: $parent.getBookDetail">Dettagli</a></small>
+                            <small><a href="#" data-bind="click: $parent.deleteBook">Elimina</a></small>
+                        </li>
+                    </ul> -->
+                    
+                    <table class="table" data-bind="foreach: books">
+                        <tr>
+                            <td>
+                                <strong><span data-bind="text: AuthorName"></span></strong>:
+                            </td>
+                            <td>
+                                <span data-bind="text: Title"></span>
+                            </td>
+                            <td>
+                                <small><a href="#" data-bind="click: $parent.getBookDetail">Dettagli</a></small>
+                            </td>
+                            <td>
+                                <small><a href="#" data-bind="click: $parent.deleteBook">Elimina</a></small>
+                            </td>
+                        </tr>                        
+                    </table>                   
+                </div>
+                
+           
+            </div>
+        <div class="alert alert-danger" data-bind="visible: error"><p data-bind="text: error"></p></div>
+    </div>
+
+    <!-- ko if:detail() -->
+
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">Dettagli del Libro Selezionto</h2>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" data-bind="submit: updateBook">
+                    <input type="hidden" data-bind="text: detail().Id" />
+                    <input type="hidden" data-bind="text: detail().AuthorId" />
+                    <table class="table">
+                        <tr><td>Autore</td><td data-bind="text: detail().AuthorName"></td></tr>
+                        <tr><td>Titolo</td><td><input type="text" class="form-control" data-bind="value: detail().Title"></td></tr>
+                        <tr><td>Anno</td><td><input type="number" class="form-control" data-bind="value: detail().Year"></td></tr>
+                        <tr><td>Genere</td><td><input type="text" class="form-control" data-bind="value: detail().Genre"></td></tr>
+                        <tr><td>Prezzo</td><td><input type="number" class="form-control" data-bind="value: detail().Price"></td></tr>
+                    </table>
+                    <button type="submit" class="btn btn-default">Salva</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- /ko -->
+
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">Aggiungi Libro</h2>
+            </div>
+
+            <div class="panel-body">
+                <form class="form-horizontal" data-bind="submit: addBook">
+                    <div class="form-group">
+                        <label for="inputAuthor" class="col-sm-2 control-label">Autore</label>
+                        <div class="col-sm-10">
+                            <select data-bind="options:authors, optionsText: 'Name', value: newBook.Author"></select>
+                        </div>
+                    </div>
+
+                    <div class="form-group" data-bind="with: newBook">
+                        <label for="inputTitle" class="col-sm-2 control-label">Titolo</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputTitle" data-bind="value:Title" />
+                        </div>
+
+                        <label for="inputYear" class="col-sm-2 control-label">Anno</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="inputYear" data-bind="value:Year" />
+                        </div>
+
+                        <label for="inputGenre" class="col-sm-2 control-label">Genere</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputGenre" data-bind="value:Genre" />
+                        </div>
+
+                        <label for="inputPrice" class="col-sm-2 control-label">Prezzo</label>
+                        <div class="col-sm-10">
+                            <input type="number" step="any" class="form-control" id="inputPrice" data-bind="value:Price" />
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-default">Salva</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
